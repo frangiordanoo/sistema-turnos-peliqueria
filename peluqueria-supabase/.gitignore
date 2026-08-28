@@ -1,0 +1,10 @@
+# Claves — NUNCA subir a GitHub
+.env.local
+.env
+
+# Dependencias
+node_modules/
+dist/
+
+# Editor
+.DS_Store
