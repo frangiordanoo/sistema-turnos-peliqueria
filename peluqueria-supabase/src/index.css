@@ -123,3 +123,115 @@ body { font-family:var(--font-sans); background:var(--cream); color:var(--dark);
 
 .loading { text-align:center; padding:40px; color:var(--muted); font-size:14px; }
 .empty   { text-align:center; padding:40px; color:var(--muted); font-size:13px; }
+
+/* ── RESPONSIVE MOBILE ───────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+
+  /* Layout — ocultar sidebar, mostrar bottom nav */
+  .app-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  /* Topbar mobile */
+  .topbar {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .topbar h2 { font-size: 17px; }
+  .topbar-sub { font-size: 11px; }
+  .topbar > div:last-child {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .topbar input[type="date"] {
+    flex: 1;
+    font-size: 12px;
+    padding: 7px 10px;
+  }
+
+  /* Page content */
+  .page-content { padding: 14px 12px 90px; }
+
+  /* Stats — 2 columnas en mobile */
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .stat-card { padding: 12px; }
+  .stat-value { font-size: 22px; }
+
+  /* Agenda — una sola columna */
+  .agenda-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* Side panel debajo */
+  .side-panel { flex-direction: column; }
+
+  /* Slots */
+  .slot { padding: 4px 6px; }
+  .slot-bar { padding: 8px 10px; }
+  .slot-price { position: static; display: block; margin-top: 4px; transform: none; }
+  .slot-bar .btn-sm { font-size: 11px; padding: 4px 8px; }
+
+  /* Cards */
+  .card-header { padding: 12px 14px; flex-wrap: wrap; gap: 6px; }
+
+  /* Tabla clientes — scroll horizontal */
+  .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table { min-width: 500px; }
+
+  /* Forms */
+  .form-row { grid-template-columns: 1fr; }
+  .modal { padding: 20px 16px; width: 95vw; }
+
+  /* Reservar pública */
+  .reserva-card { padding: 24px 18px; }
+  .horarios-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .horario-btn { padding: 8px 4px; font-size: 12px; }
+
+  /* Bottom navigation bar */
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--dark);
+    z-index: 50;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .bottom-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 4px;
+    text-decoration: none;
+    color: rgba(255,255,255,0.4);
+    font-size: 10px;
+    gap: 4px;
+    transition: color 0.2s;
+    border-top: 2px solid transparent;
+  }
+  .bottom-nav-item.active {
+    color: var(--gold);
+    border-top-color: var(--gold);
+  }
+  .bottom-nav-item span:first-child { font-size: 20px; }
+}
+
+/* Desktop — ocultar bottom nav */
+@media (min-width: 769px) {
+  .bottom-nav { display: none; }
+}

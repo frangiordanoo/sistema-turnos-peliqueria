@@ -3,8 +3,8 @@ import { NavLink, Outlet } from 'react-router-dom'
 const NAV = [
   { to: '/agenda',        icon: '📅', label: 'Agenda' },
   { to: '/clientes',      icon: '👥', label: 'Clientes' },
-  { to: '/nuevo',         icon: '➕', label: 'Nuevo turno' },
-  { to: '/recordatorios', icon: '🔔', label: 'Recordatorios' },
+  { to: '/nuevo',         icon: '➕', label: 'Nuevo' },
+  { to: '/recordatorios', icon: '🔔', label: 'Avisos' },
 ]
 
 export default function Layout() {
@@ -12,6 +12,7 @@ export default function Layout() {
 
   return (
     <div className="app-layout">
+      {/* Sidebar — solo desktop */}
       <aside className="sidebar">
         <div className="sidebar-logo">
           <div className="sidebar-logo-icon">✂</div>
@@ -26,13 +27,13 @@ export default function Layout() {
             </NavLink>
           ))}
 
-          <div style={{ padding: '16px 20px', marginTop: 8, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-            <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 8 }}>
+          <div style={{ padding:'16px 20px', marginTop:8, borderTop:'1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ fontSize:11, color:'rgba(255,255,255,0.3)', textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:8 }}>
               Link para clientes
             </div>
             <button
               className="btn btn-outline"
-              style={{ width: '100%', fontSize: 11, color: 'rgba(255,255,255,0.5)', borderColor: 'rgba(255,255,255,0.1)', justifyContent: 'center' }}
+              style={{ width:'100%', fontSize:11, color:'rgba(255,255,255,0.5)', borderColor:'rgba(255,255,255,0.1)', justifyContent:'center' }}
               onClick={() => { navigator.clipboard.writeText(linkClientes); alert('¡Link copiado!') }}
             >
               📋 Copiar link
@@ -42,7 +43,7 @@ export default function Layout() {
 
         <div className="sidebar-footer">
           <div className="barber-badge">
-            <div className="avatar" style={{ background: '#C9A84C', color: '#1A1410', fontSize: 12 }}>MG</div>
+            <div className="avatar" style={{ background:'#C9A84C', color:'#1A1410', fontSize:12 }}>MG</div>
             <div>
               <p>Marcos García</p>
               <span>Barbero</span>
@@ -51,7 +52,20 @@ export default function Layout() {
         </div>
       </aside>
 
-      <main><Outlet /></main>
+      {/* Contenido principal */}
+      <main style={{ minHeight:'100vh', overflowX:'hidden' }}>
+        <Outlet />
+      </main>
+
+      {/* Bottom nav — solo mobile */}
+      <nav className="bottom-nav">
+        {NAV.map(({ to, icon, label }) => (
+          <NavLink key={to} to={to} className={({ isActive }) => `bottom-nav-item${isActive ? ' active' : ''}`}>
+            <span>{icon}</span>
+            <span>{label}</span>
+          </NavLink>
+        ))}
+      </nav>
     </div>
   )
 }
