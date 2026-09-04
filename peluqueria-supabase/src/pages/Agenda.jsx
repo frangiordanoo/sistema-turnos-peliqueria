@@ -117,15 +117,20 @@ export default function Agenda() {
                         </div>
                         <div className="slot-service">{t.servicio}</div>
                         <div className="slot-price">${t.precio.toLocaleString()}</div>
-                        <div style={{ marginTop:6, display:'flex', gap:6 }}>
-                          {t.estado === 'pendiente' && (
-                            <button className="btn btn-sm btn-gold" onClick={() => cambiarEstado(t.id, 'confirmado')}>Confirmar</button>
-                          )}
-                          {!['completado','cancelado'].includes(t.estado) && (
-                            <button className="btn btn-sm btn-outline" onClick={() => cambiarEstado(t.id, 'completado')}>Completar</button>
-                          )}
-                          <button className="btn btn-sm btn-danger" onClick={() => cambiarEstado(t.id, 'cancelado')}>Cancelar</button>
-                        </div>
+                        <div style={{ marginTop:6, display:'flex', gap:6, flexWrap:'wrap' }}>
+  {t.estado === 'pendiente' && (
+    <button className="btn btn-sm btn-gold" onClick={async () => {
+      await cambiarEstado(t.id, 'confirmado')
+      const msg = encodeURIComponent(`Hola ${t.cliente_nombre}! 💈 Tu turno del ${t.fecha} a las ${t.hora} hs para ${t.servicio} está *confirmado*. ¡Te esperamos!`)
+      const tel = t.cliente_telefono.replace(/\D/g,'')
+      window.open(`https://wa.me/549${tel}?text=${msg}`, '_blank')
+    }}>✅ Confirmar y avisar</button>
+  )}
+  {!['completado','cancelado'].includes(t.estado) && (
+    <button className="btn btn-sm btn-outline" onClick={() => cambiarEstado(t.id, 'completado')}>Completar</button>
+  )}
+  <button className="btn btn-sm btn-danger" onClick={() => cambiarEstado(t.id, 'cancelado')}>Cancelar</button>
+</div>
                       </div>
                     ) : (
                       <div className="slot-bar free"><span>— Libre —</span></div>
