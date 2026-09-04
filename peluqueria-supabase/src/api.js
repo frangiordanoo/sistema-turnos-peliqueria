@@ -38,7 +38,7 @@ export async function getDisponibles(fecha) {
   }
 }
 
-export async function crearTurno({ cliente_nombre, cliente_telefono, fecha, hora, servicio, notas, origen = 'cliente' }) {
+export async function crearTurno({ cliente_nombre, cliente_telefono, fecha, hora, servicio, notas, origen = 'cliente', pago = '' }) {
   // Verificar que no esté ocupado
   const { data: existe } = await supabase
     .from('turnos')
@@ -62,6 +62,7 @@ export async function crearTurno({ cliente_nombre, cliente_telefono, fecha, hora
     precio: srv.precio,
     origen,
     notas,
+    pago,
     estado: 'pendiente',
   }).select().single()
 
