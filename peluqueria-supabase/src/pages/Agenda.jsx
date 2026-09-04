@@ -123,7 +123,7 @@ export default function Agenda() {
       await cambiarEstado(t.id, 'confirmado')
       const msg = encodeURIComponent(`Hola ${t.cliente_nombre}! 💈 Tu turno del ${t.fecha} a las ${t.hora} hs para ${t.servicio} está *confirmado*. ¡Te esperamos!`)
       const tel = t.cliente_telefono.replace(/\D/g,'')
-      window.open(`https://wa.me/549${tel}?text=${msg}`, '_blank')
+    window.location.href = `https://wa.me/549${tel}?text=${msg}`
     }}>✅ Confirmar y avisar</button>
   )}
   {!['completado','cancelado'].includes(t.estado) && (
