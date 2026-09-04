@@ -64,14 +64,15 @@ export default function NuevoTurno() {
               {SERVICIOS.map(s => <option key={s.id} value={s.id}>{s.nombre} — ${s.precio.toLocaleString()}</option>)}
             </select>
           </div>
-          <div className="form-group">
-  <label>Método de pago</label>
-  <select value={form.pago} onChange={e => set('pago', e.target.value)}>
-    <option value="">Sin especificar</option>
-    <option value="efectivo">💵 Efectivo</option>
-    <option value="transferencia">📲 Transferencia</option>
-  </select>
-</div>
+
+                 <div className="form-group">
+          <label>Método de pago</label>
+          <select value={form.pago} onChange={e => set('pago', e.target.value)}>
+            <option value="">Sin especificar</option>
+            <option value="efectivo">💵 Efectivo</option>
+            <option value="transferencia">📲 Transferencia</option>
+          </select>
+        </div>
           <div className="form-group">
             <label>Notas (opcional)</label>
             <textarea value={form.notas} onChange={e => set('notas', e.target.value)} rows={3} placeholder="Preferencias del cliente..." />
