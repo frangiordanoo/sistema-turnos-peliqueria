@@ -100,7 +100,7 @@ export async function eliminarTurno(id) {
 export async function getClientes() {
   const { data, error } = await supabase
     .from('clientes')
-    .select('*, turnos(count)')
+    .select('*')
     .order('nombre')
   if (error) throw new Error(error.message)
   return data
