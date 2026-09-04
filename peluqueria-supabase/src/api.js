@@ -68,17 +68,18 @@ export async function crearTurno({ cliente_nombre, cliente_telefono, fecha, hora
   if (error) throw new Error(error.message)
 
   // Guardar cliente si no existe
+   // Guardar o actualizar cliente siempre
   const { data: clienteExiste } = await supabase
     .from('clientes')
     .select('id')
     .eq('telefono', cliente_telefono)
-    .single()
+    .maybeSingle()
 
   if (!clienteExiste) {
     await supabase.from('clientes').insert({ nombre: cliente_nombre, telefono: cliente_telefono })
+  } else {
+    await supabase.from('clientes').update({ nombre: cliente_nombre }).eq('telefono', cliente_telefono)
   }
-
-  return data
 }
 
 export async function actualizarEstado(id, estado) {
